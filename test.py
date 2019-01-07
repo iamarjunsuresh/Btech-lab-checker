@@ -70,18 +70,28 @@ for f in os.listdir(folder):
         outputf1=open("output.txt","r")
         cortxt=outputf.read()
         acttxt=outputf1.read()
+	cortxt=cortxt.rstrip()
+	acttxt=acttxt.rstrip()
         lines=acttxt.split('\n');
         proctxt=""        
         for line in lines:
             proctxt=proctxt+line.rstrip()+"\n"
-        
-        #print cortxt.lstrip().rstrip()+"\n==\n"+acttxt.lstrip().rstrip()
-        if cortxt==proctxt:
+	lines=cortxt.split('\n');
+        cotxt=""        
+        for line in lines:
+            cotxt=cotxt+line.rstrip()+"\n"
+
+        #open("checkc.txt","w").write(proctxt)
+	#open("checkact.txt","w").write(cotxt)
+        #print cortxt+"\n==\n"+proctxt
+        if cotxt==proctxt:
             print G+"\tTestcase #{0}: Correct".format(testcaseno)+W
             correct.append(testcaseno)
         else:
             print R+"\tTestcase #{0}: Wrong".format(testcaseno)+W
             wrong.append(testcaseno)
+            open("checkc.txt","w").write(proctxt)
+            open("checkact.txt","w").write(cotxt)
 correct.sort()
 wrong.sort()
 print(W+"\nCORRECT : "+' '.join([str(v) for v in correct]))

@@ -5,13 +5,14 @@ import hashlib
 
 
 def check(folder):
-    m = hashlib.md5()
     txt=""
     for f in os.listdir(folder):  
         if f.endswith(".txt") and f.startswith("out"):
             txt=txt+open(folder+"/"+f,"r").read()
     m.update(txt)
-    return m.hexdigest()
-
+    
+m = hashlib.md5()
 
 print("\""+check(sys.argv[1])+"\",")
+
+return m.hexdigest()
